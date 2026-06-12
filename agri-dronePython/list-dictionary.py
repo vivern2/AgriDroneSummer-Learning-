@@ -1,3 +1,5 @@
+import random
+
 # 🌱 Beginner
 # 1. Crop Inventory
 # You have a list of crops being monitored by a drone:
@@ -30,6 +32,8 @@ for key, value in drone_stats.items():
     print(f"{key}: {value}")
 
 
+
+
 # 🌿 Intermediate
 # 3. Moisture Alert
 # You have a list of dictionaries, one per sensor zone:
@@ -53,6 +57,8 @@ for sensor in pythonsensors:
     if sensor['moisture'] < 40:
         print(f"Warning Zone {sensor['zone']} moisture below optimal level")  
 
+
+
 # 4. Fleet Tracker
 # You have a list of drones, each with a id and battery level:
 # pythonfleet = [
@@ -71,9 +77,14 @@ pythonfleet = [
     {"id": "DR04", "battery": 8},
     {"id": "DR05", "battery": 91},
 ]
-for n in pythonfleet: 
-    if pythonfleet["battery"] < 20: 
-        print()
+# use below to use list max function on a dictionary by using lambda
+largest = max(pythonfleet, key=lambda x: x['battery'])
+for fleet in pythonfleet: 
+    if fleet['battery'] < 20: 
+        print(f"{fleet['id']} battery is {fleet['battery']} and needs charging")
+print(f"{largest['id']} has the highest battery level at {largest['battery']}%")
+
+
 
 # 🌾 Advanced
 # 5. Crop Health Summary
@@ -87,6 +98,52 @@ for n in pythonfleet:
 #     {"zone": "B6", "crop": "corn", "health": 7},
 # ]
 # Calculate and print the average health score per crop type — so one average for wheat and one for corn.
+pythonscans = [
+    {"zone": "B1", "crop": "wheat", "health": 8},
+    {"zone": "B2", "crop": "corn", "health": 4},
+    {"zone": "B3", "crop": "wheat", "health": 6},
+    {"zone": "B4", "crop": "corn", "health": 9},
+    {"zone": "B5", "crop": "wheat", "health": 3},
+    {"zone": "B6", "crop": "corn", "health": 7},
+]
+totalWht = 0
+totalCorn = 0
+countWht = 0
+countCorn = 0
+for n in pythonscans: 
+    if n["crop"] == "wheat": 
+        totalWht += n['health']
+        countWht += 1
+    else:
+        totalCorn += n['health']
+        countCorn += 1
+cornAvg = totalCorn / countCorn
+wheatAvg = totalWht / countWht
+print(f"Average Health score for corn: {cornAvg:.2f}")
+print(f"Average Health score for wheat: {wheatAvg:.2f}")
+
+totals = {}
+counts = {}
+for n in pythonscans:
+    crop = n['crop']
+    print(crop)   
+    if crop not in totals:
+        totals[crop] = 0
+        counts[crop] = 0
+    totals[crop] += n['health']
+    counts[crop] += 1
+print(totals['wheat'] / counts['wheat'])
+print(totals['corn'] / counts['corn'])
+
+        
 
 # 6. Waypoint Logger
-# A drone flies over 5 waypoints. For each waypoint, generate a random health score (1–10) and store each waypoint as a dictionary with id, coordinates, and health_score in a list. After the flight, print the full log and highlight the waypoint with the lowest health score for follow-up inspection.
+# A drone flies over 5 waypoints. For each waypoint, generate a random health score (1–10) and store each waypoint as a dictionary with id, 
+# coordinates, and health_score in a list. After the flight, print the full log and highlight the waypoint with the lowest health score for follow-up inspection.
+
+randHealth = random.int(1, 10)
+waypoints = [
+    {"id": 1,
+    "coordinates": 2,
+    "healthscore": randHealth}
+]
