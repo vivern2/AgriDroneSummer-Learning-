@@ -141,9 +141,42 @@ print(totals['corn'] / counts['corn'])
 # A drone flies over 5 waypoints. For each waypoint, generate a random health score (1–10) and store each waypoint as a dictionary with id, 
 # coordinates, and health_score in a list. After the flight, print the full log and highlight the waypoint with the lowest health score for follow-up inspection.
 
-randHealth = random.int(1, 10)
-waypoints = [
-    {"id": 1,
-    "coordinates": 2,
-    "healthscore": randHealth}
+
+waypointData = [
+    {"id": 359,
+    "coordinates": (-930,432),
+    "waypointName": "waypoint1"},
+    {"id": 256,
+    "coordinates": (3,900),
+    "waypointName": "waypoint2"},
+    {"id": 232,
+    "coordinates": (-590, 900),
+    "waypointName": "waypoint3"},
+    {"id": 243,
+    "coordinates": (-20,300),
+    "waypointName": "waypoint4"},
+    {"id": 277,
+    "coordinates": (-630,332),
+    "waypointName": "waypoint5"}
 ]
+
+# Build the flight log dynamically
+waypoints = []
+for wp in waypointData:
+    waypoints.append({
+        "id": wp["id"],
+        "coordinates": wp["coordinates"],
+        "waypointName": wp["waypointName"],
+        "healthscore": random.randint(1, 10)  # generated here, not before
+    })
+
+
+# use below to use list max function on a dictionary by using lambda
+smallest = min(waypoints, key=lambda x:x['healthscore'])
+print("Flight Log: \n")
+for x in waypoints:
+    if x['healthscore'] == smallest['healthscore']:
+        print(f"{x['waypointName']}\n drone #{x['id']}\n Health:{x['healthscore']} bad needs inspection\ncoordinates:{x['coordinates']}\n")
+    else:
+        print(f"{x['waypointName']}\n drone #{x['id']}\n Health:{x['healthscore']} good\ncoordinates:{x['coordinates']}\n")
+    
