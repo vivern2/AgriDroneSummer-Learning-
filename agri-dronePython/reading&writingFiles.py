@@ -12,7 +12,7 @@ with open ("agri-dronePython/cropData2/agriculture_dataset.txt", "r") as file:
     rows = content.split("\n")
     #Below skips the header row as that data is not needed
     rows = rows[1:]
-    
+
     for row in rows:
         if row == "": #this skips any empty rows
             continue
@@ -26,25 +26,59 @@ with open ("agri-dronePython/cropData2/agriculture_dataset.txt", "r") as file:
 # Read the txt file and count how many farms use each irrigation type (Drip, Flood, Sprinkler, Rain-fed, Manual).
 #  Print the totals. (Hint: use a dictionary to keep counts)
 with open ("agri-dronePython/cropData2/agriculture_dataset.txt", "r") as file:
+    totalIrrigation = {}
+    tDrip = 0
+    tFlood = 0
+    tSprink = 0
+    tRainfed = 0
+    tManual = 0
     readIrrigation = file.read()
     #below will split it at the \n character
-    rows2 = content.split("\n")
-    total = []
-    count = []
-    for row2 in rows2:
-        if row2 == "":
+    rows2 = readIrrigation.split("\n")
+    #Below will skip the header row as that data is not needed
+    for rowNew in rows2: 
+        if rowNew == "":
             continue
-        columns2 = row2.split("\t")
+        col = rowNew.split("\t")
+        totalIrrigation[rowNew] = col[3]
+
+    for i in totalIrrigation:
+        if totalIrrigation[i] == "Drip":
+            tDrip += 1
+        if totalIrrigation[i] == "Flood":
+            tFlood += 1
+        if totalIrrigation[i] == "Sprinkler":
+            tSprink += 1
+        if totalIrrigation[i] == "Rain-fed":
+            tRainfed += 1
+        if totalIrrigation[i] == "Manual":
+            tManual += 1   
+    print(f'{tDrip} Farms use Drip irrigation')
+    print(f'{tFlood} Farms use Flood irrigation')
+    print(f'{tSprink} Farms use Sprinkler irrigation')
+    print(f'{tRainfed} Farms use Rain-fed irrigation')
+    print(f'{tManual} Farms use Manual irrigation') 
+
         
+            
 
 
 
 
-
-
-# 📊 CSV File — Inda_Agriculture_Crop_Production.csv
+# 📊 CSV File — Inda_Agriculture.csv
 # 3. Season Filter
 # Read the CSV using csv.DictReader and print all rows where the Season is "Kharif" and Production is above 5000 tonnes.
+
+with open("agri-dronePython/cropData2/India_Agriculture.csv", "r") as file:
+    reader = csv.DictReader(file)
+    #below is how we would see the file
+    for row in reader:
+        if row["Production"] == "":
+            continue
+        if(row["Season"] == "Kharif") and (float(row["Production"]) > 5000) :
+            print(row)
+    
+
 
 # 4. Top Yield by State
 # Read the CSV and find the row with the highest Yield value. Print the State, Crop, and Yield.
