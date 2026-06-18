@@ -122,6 +122,7 @@ wheatAvg = totalWht / countWht
 print(f"Average Health score for corn: {cornAvg:.2f}")
 print(f"Average Health score for wheat: {wheatAvg:.2f}")
 
+
 totals = {}
 counts = {}
 for n in pythonscans:
