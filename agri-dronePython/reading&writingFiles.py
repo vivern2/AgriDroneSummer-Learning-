@@ -82,17 +82,40 @@ with open("agri-dronePython/cropData2/India_Agriculture.csv", "r") as file:
 
 # 4. Top Yield by State
 # Read the CSV and find the row with the highest Yield value. Print the State, Crop, and Yield.
+with open("agri-dronePython/cropData2/India_Agriculture.csv", "r") as file:
+    reader = csv.DictReader(file)
+    indiaData = []
+    #Below goes throug the reader dictionary containing our data and checks if yeild is empty and adds to idia dictionary
+    for row in reader:
+        if row["Yield"] == "":
+            continue
+        indiaData.append(row)
+        
+    largest = max(indiaData, key=lambda x: float(x['Yield']))
+    print(f"{largest['State']} produces {largest['Crop']} crop and has the highest yeild being {largest['Yield']}")
+    
+
+         
 
 # 📦 JSON File — Global_Agriculture.json
 # 5. Region Filter
 # Read the JSON file and print all entries where region is "South Asia" and year is 2000. Print the country_name and value.
+with open("agri-dronePython/cropData2/Global_Agriculture.json", "r") as file: 
+    data = json.load(file)
+    for row in data:
+        if row['region'] == "" or row['year'] == "":
+            continue 
+        if (row['region'] == 'South Asia') and (row['year'] == 2000):
+            print(f"{row['country_name']} and agriculture value:{row['value']}")
 
 # 6. Country Tracker
 # Read the JSON and find the average agriculture value for a country of your choice across all years it appears. Print the country name and its average value rounded to 2 decimal places.
-
-# 🌾 Combined Challenge
-# 7. Cross File Report
-
-# From the txt file, calculate the average yield across all 50 farms
-# From the JSON file, find the highest agriculture value recorded globally and which country it belongs to
-# Print both results as a mini summary report
+with open("agri-dronePython/cropData2/Global_Agriculture.json", "r") as file: 
+    data = json.load(file)
+    avgNigeria = []
+    for row in data:
+        if row['country_name'] == "Nigeria":
+            avgNigeria.append(row['value'])
+            print(f"{row['country_name']} has an agriculture value of {row['value']} during {row['year']}")
+    avgValue = sum(avgNigeria) / len(avgNigeria) 
+    print(f"The average agriculture value for Nigeria is {avgValue:.2f}")
