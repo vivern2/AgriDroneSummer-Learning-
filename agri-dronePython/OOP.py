@@ -1,3 +1,5 @@
+import random
+
 # 🌱 Beginner
 # 1. Basic Drone Class
 # Create a Drone class with attributes id, battery, and altitude (default 0). Add a method status() that prints all three values in a readable sentence.
@@ -73,18 +75,63 @@ for x in droneInZone:
     x.report()
 
         
-     
-
-     
-          
-     
 # 🌾 Advanced
 # 5. Flight Log Class
 # Create a Drone class with id, battery, and a log attribute that starts as an empty list. Add a fly(distance) method that:
 # Reduces battery by distance * 2 (capped at 0, never negative)
 # Appends a string describing the flight to self.log
 # Then create one drone, call fly() three times with different distances, and print the full log at the end.
+class Flight_Log: 
+    def __init__(self, id, battery = 100):
+         self.id = id
+         self.battery = battery
+         self.log = []  # fresh empty list created for EACH object
+
+    def fly(self, distance):
+        self.battery -= (distance * 2)
+        self.battery = max (self.battery, 0)
+        self.log.append(f"drone #{self.id} currently has a battery of {self.battery}% and has flown {distance} ft")
+        
+
+
+droneFly = Flight_Log(33)
+droneFly.fly(random.randint(1, 30))
+droneFly.fly(random.randint(1, 30))
+droneFly.fly(random.randint(1, 30))
+for x in droneFly.log:
+    print(x)
+
 
 
 # 6. Field Manager
-# Create a Field class that has a name and a sensors list (starts empty). Add a method add_sensor(sensor) that appends a Sensor object (reuse your class from #3) to the list, and a method average_moisture() that calculates the average moisture across all sensors in the field.
+# Create a Field class that has a name and a sensors list (starts empty).
+#  Add a method add_sensor(sensor) that appends a Sensor object (reuse your class from #3) to the list,
+#  and a method average_moisture() that calculates the average moisture across all sensors in the field.
+
+#Remember that this will use the Sensor class that we created in #3
+
+class Field:
+    def __init__(self,name):
+        self.name = name
+        self.sensors = []
+
+    def add_sensor(self, sensor):
+        self.sensors.append(sensor)
+
+    def avg_moisture(self):
+        n_sensors = len(self.sensors)
+        total = 0
+        for x in self.sensors:  # x is each Sensor object
+            total += x.moisture # access moisture ON that object
+        return total / n_sensors
+
+newField = Field("My field")
+drone3 = Sensor(6,80,"wheat", 15)
+drone4 = Sensor(3,20,"coconut",70)
+drone5 = Sensor(5,23,"mango",30)
+newField.add_sensor(drone3)
+newField.add_sensor(drone4)
+newField.add_sensor(drone5)
+avg = newField.avg_moisture()
+print(f"Average moisture for {newField.name}: {avg:.2f}%")
+    
