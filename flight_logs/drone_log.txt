@@ -1,0 +1,30 @@
+
+drone: #8
+ flyed:18ft
+ current battery:81% 
+ current time flown:2026-06-23 18:10
+
+
+drone: #13
+ flyed:15ft
+ current battery:41% 
+ current time flown:2026-06-23 18:10
+
+
+drone: #16
+ flyed:191ft
+ current battery:64% 
+ current time flown:2026-06-23 18:10
+
+
+drone: #6
+ flyed:53ft
+ current battery:67% 
+ current time flown:2026-06-23 18:10
+
+
+drone: #13
+ flyed:155ft
+ current battery:29% 
+ current time flown:2026-06-23 18:10
+

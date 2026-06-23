@@ -1,0 +1,54 @@
+🌱 Project 1 — Drone Fleet Manager (CLI)
+Skills used: OOP, loops, lists, dictionaries, exception handling
+Build a simple command-line tool where you can:
+
+Add drones to a fleet
+Check battery status of all drones
+Charge individual drones
+Display a fleet summary report
+
+This directly extends your OOP challenges into something interactive.
+
+🌿 Project 2 — Crop Data Analyzer
+Skills used: File I/O, CSV reading, loops, dictionaries, modules
+Using your real agriculture_dataset.txt:
+
+Read the file
+Calculate average yield per crop type
+Find the highest and lowest yielding farms
+Write a summary report to a new .txt or .json file
+
+This connects your file handling work to real data analysis — very close to what Rainbet does.
+
+🌾 Project 3 — Field Health Monitor
+Skills used: OOP, file I/O, exception handling, modules, JSON
+Build a system that:
+
+Reads sensor data from a JSON file
+Creates Sensor objects from the data
+Runs health checks on every zone
+Flags dry zones and writes a warning log to a new file
+
+This combines OOP with file I/O — two major topics in one project.
+
+🚁 Project 4 — Drone Mission Planner
+Skills used: OOP, loops, exception handling, file I/O, list comprehensions
+Build a Mission class that:
+
+Takes a list of waypoints (coordinates)
+Assigns a drone to the mission
+Simulates flying each waypoint (reducing battery)
+Logs the mission to a JSON file when complete
+Handles errors gracefully (what if battery runs out mid-mission?)
+
+This is the most advanced of the four and ties everything together in a realistic drone scenario.
+
+My recommendation:
+Do all four in order — each one builds on the previous. Projects 1 and 2 are achievable right after finishing OOP and modules. Project 3 and 4 should come after exception handling.
+By the time you finish all four you'll have:
+
+A small portfolio of agri-drone Python projects
+Real experience combining multiple concepts
+Code you could actually show a potential collaborator or employer
+
+Want to save these somewhere, or shall we finish the OOP challenges first?
