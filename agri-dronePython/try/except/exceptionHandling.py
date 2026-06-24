@@ -69,14 +69,61 @@ with open("agri-dronePython/cropData2/India_Agriculture.csv", "r") as file:
 # Raises a TypeError if distance isn't a number
 # Reduces battery by distance * 2 if valid
 # Wrap all calls to fly() in try/except catching both error types with different messages
+class Drone: 
+    def __init__(self, id, battery = 100):
+        self.id = id
+        self.battery = battery
+    def fly(self, distance):
+        try:
+            self.distance = distance
+            #below cheks for the errrors first
+            if not isinstance(distance, (int, float)):
+                raise TypeError("distance must be a number")
+            if distance < 0: 
+                raise ValueError("distance cannot be negative")
+            
+            #Below is the actual code that needs to work
+            self.battery -= (distance * 2)
+            print(f"battery is now :{self.battery}%")
+        
+        except ValueError as e:
+            print(f"Error: {e}")
+        except TypeError as t:
+            print(f"Error: {t}")
+
+            
+drone1 = Drone(331, 70)
+drone2 = Drone(221, 80)
+drone3 = Drone(113, 90)
+drone1.fly("Hello")
+drone2.fly(10)
+drone3.fly(-3)
 
 
 # 🌾 Advanced
 # 5. Field Data Pipeline
 
 # Write a function process_field_data(filename) that:
-
 # Reads your agriculture_dataset.txt
 # For each row, tries to convert Yield and Farm_Area to floats
 # Catches any ValueError on bad rows and logs them to a separate errors.txt file
 # At the end prints a summary: how many rows processed successfully, how many failed
+
+
+with open ("agri-dronePython/cropData2/agriculture_dataset.txt", "r") as file:
+    content = file.read()
+    #below will split it at the \n character
+    rows = content.split("\n")
+    #Below skips the header row as that data is not needed
+    rows = rows[1:]
+    goodRows = 0
+    badRows = 0
+    for row in rows:
+        try:
+            columns = row.split("\t") #will split on \t
+            yieldNum = float(columns[6]) #converts the string in the array to a num we can use
+            FarmArea = float(columns[2])
+            goodRows += 1
+        except ValueError:
+            badRows += 1
+    print(f"good rows: {goodRows}, bad rows: {badRows}")
