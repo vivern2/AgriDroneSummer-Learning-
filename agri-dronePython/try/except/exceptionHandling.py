@@ -124,6 +124,8 @@ with open ("agri-dronePython/cropData2/agriculture_dataset.txt", "r") as file:
             yieldNum = float(columns[6]) #converts the string in the array to a num we can use
             FarmArea = float(columns[2])
             goodRows += 1
-        except ValueError:
+        except (ValueError, IndexError):
             badRows += 1
+            with open("field_logs/errors.txt", "a") as err_file:
+                err_file.write(f"Bad row: {row}\n")
     print(f"good rows: {goodRows}, bad rows: {badRows}")
